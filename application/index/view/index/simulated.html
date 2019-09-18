@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单信息确认</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>请确认交易信息核对无误后进行付款</h1>
+        <form method="post" action="initiatePayment" >
+            <input type="hidden" class="form-control" name="account_id"  placeholder="Email" value="10602">
+            <div class="form-group">
+                <label for="userID">交易账户</label>
+                <input type="number" class="form-control" id="userID" name="user_id" placeholder="用户ID" value="{$userid}" readonly="readonly">
+            </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">订单号</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" name="order_id" placeholder="订单号" value="{$orderid}" readonly="readonly">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">订单金额</label>
+            <input type="number" class="form-control" id="exampleInputPassword1" name="amount" placeholder="订单金额" value="{$money}" readonly="readonly">
+        </div>
+        <button type="submit" class="btn btn-default">确认无误点击支付</button>
+    </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+</body>
+</html>

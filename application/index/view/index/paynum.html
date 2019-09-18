@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css">
+  <link rel="stylesheet" href="__STATIC__/css/style.css">
+
+
+  <title>支付</title>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="userinfo">返回个人中心</a>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="index">返回首页</a></li>
+        <li class="active"><a href="#">充值中心 <span class="sr-only">(current)</span></a></li>
+        <li><a href="news">新闻资讯</a></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">软件下载</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="container_logo">
+        <div class="play col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <img src="__STATIC__/images/logo.png" />
+        </div>
+      </div>
+    </div>
+    <form action="simulated" method="post">
+      <div class="row">
+        <div class="play col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <div class="form-group">
+
+            <h4>充值金额</h4>
+            <div class="number_amount">
+
+              <label>￥</label>
+              <input type="number" name="amount" readonly="readonly">
+              <input type="hidden" class="getId" name="id">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="quick_amount col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <p class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-item='1000'>1000</p>
+          <p class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-item='3000'>3000</p>
+          <p class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-item='5000'>5000</p>
+          <p class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-item='10000'>10000</p>
+          <p class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-item='30000'>30000</p>
+          <p class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-item='50000'>50000</p>
+        </div>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!--<img src="__STATIC__/picture/201711091758389646.png" style="height: 4em">-->
+        <img src="__STATIC__/picture/yinlian.jpg" style="height: 5em"></div>
+      <div class="row">
+        <div class="_submit col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <input type="submit" value="确认充值" class="btn btn-primary submit-amount">
+          <a  id="myId" class="btn btn-info submit-amount" href="">其他充值方式</a>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  <div class="modal fade" tabindex="-1" role="dialog" id='exampleModal'>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">提示</h4>
+        </div>
+        <div class="modal-body">
+          <p>输入金额不能超出5000元</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mask"></div>
+
+</body>
+<script src="__STATIC__/js/jquery.min.js"></script>
+<script>
+var $amountInput = $('[type="number"]');
+var amount = '';
+var $getId = $('[type="hidden"]');
+var getparse=ParaMeter();
+$getId.val(getparse.id);
+$(".quick_amount p").off("click").on("click", function () {
+  amount = $(this).text();
+  $("#myId").attr("href","transfer?amount="+ amount);
+  if (!$(this).hasClass('active')) {
+    $(this).addClass('active').siblings().removeClass('active');
+    $amountInput.val(amount);
+  } else {
+    $(this).removeClass('active');
+    $amountInput.val('');
+  }
+})
+$amountInput.on('input propertychange', function () {
+  if ($(this).val() > 5000) {
+    $('#exampleModal').modal('show')
+  }
+  if($(this).val()!==$('.quick_amount p.active').text()){
+    $('.quick_amount p').removeClass('active');
+  }
+})
+$('#exampleModal').on('hidden.bs.modal', function (e) {
+  $amountInput.val(5000);
+})
+function ParaMeter()
+{
+  var obj={};
+  var arr=location.href.substring(location.href.lastIndexOf('?')+1).split("&");
+  for(var i=0;i < arr.length;i++){
+  var aa=arr[i].split("=");
+  obj[aa[0]]=aa[1];
+}
+  return obj;
+}
+</script>
+
+</html>
