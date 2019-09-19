@@ -58,9 +58,9 @@ class Index extends   Controller
            }
 //           exit();
         //定义token
-        $token='Officialwebsite';
+        $token='';
         //填入key
-        $key='yingshiguoji20190726userinfo';
+        $key='';
         //生成签名
         $str=$token.$key.$id;
         $autograph=md5($str); // 签名的结果
@@ -75,7 +75,7 @@ class Index extends   Controller
             'data'=>$jsonData,
         ];
 
-        $resultData=$this->curl_post('http://ysgj.affeec.com/site/api-pay',$arrData,30);
+        $resultData=$this->curl_post('http://ysgj/site/api-pay',$arrData,30);
 
        $arrResultData=json_decode($resultData,1);
        $orderid=$arrResultData['data']['ordernumber'];
@@ -124,7 +124,7 @@ class Index extends   Controller
             $arrData=[
                 'data'=>$jsonData,
             ];
-            $resultData=$this->curl_post('http://ysgj.affeec.com/site/api-pay',$arrData,30);
+            $resultData=$this->curl_post('http://www/site/api-pay',$arrData,30);
 
             $arrResultData=json_decode($resultData,1);
             $orderid=$arrResultData['data']['ordernumber'];
@@ -153,9 +153,9 @@ class Index extends   Controller
         $my_pay_name=$_POST['my_pay_name'];
         $user_pay_num=$_POST['user_pay_num'];
         //定义token
-        $token='Officialwebsite';
+        $token='';
         //填入key
-        $key='yingshiguoji20190726userinfo';
+        $key='';
         //生成签名
         $str=$token.$key.$tradeno;
         $autograph=md5($str); // 签名的结果
@@ -173,7 +173,7 @@ class Index extends   Controller
         $arrData=[
             'data'=>$jsonData,
         ];
-        $resultData=$this->curl_post('http://ysgj.affeec.com/site/api-transfer',$arrData,30);
+        $resultData=$this->curl_post('http://ysgj..com/site/api-transfer',$arrData,30);
         $resultArray=json_decode($resultData,1);
         if ($resultArray['status']){
             return redirect('login');
@@ -226,7 +226,7 @@ class Index extends   Controller
        if ($ispost){
            $postData=json_encode($_POST,256);
            $jsonData=['data'=>$postData];
-           $resultJson=$this->curl_post('http://ysgj.affeec.com/site/api-login',$jsonData,30);   // 携带账户密码 往赢时国际 请求会员数据
+           $resultJson=$this->curl_post('http://ysgj..com/site/api-login',$jsonData,30);   // 携带账户密码 往赢时国际 请求会员数据
            $resultArr=json_decode($resultJson,1);
            if ($resultArr['status']==1){   //  返回值为1 的时候 密码匹配正确
                $Session->set('id',$resultArr['data']['id']);
@@ -274,7 +274,7 @@ class Index extends   Controller
             'data'=>$jsonData,
         ];
 
-        $resultData=$this->curl_post('http://ysgj.affeec.com/site/api-user-info',$arrData,30);
+        $resultData=$this->curl_post('http://ysgj..com/site/api-user-info',$arrData,30);
         $resultArr=json_decode($resultData,1);
         $Session->set('userData',$resultArr['data']);
 //        dump($Session->get('userData'));
